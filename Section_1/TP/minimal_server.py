@@ -11,7 +11,7 @@ while True:
     data, addr = s.recvfrom(1500)
     count+=1
     temps.append(float(data))
-
+    
     if (count ==10):
         print("mean temperature for 10 times")
         print(np.mean(temps))
