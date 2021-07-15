@@ -1,16 +1,15 @@
 import time
-
-
-
+"""
+BME 280 Datasheet : https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf
+"""
+from machine import I2C
+import time
 
 I2C_ADDRESS_BME280 = 0x77
 
 
-class Device:
-    """Class for communicating with an I2C device.
-
-    Allows reading and writing 8-bit, 16-bit, and byte array values to
-    registers on the device."""
+class Sensor:
+    """Class for communicating with an I2C sensor."""
 
     def __init__(self, address, i2c):
         """Create an instance of the I2C device at the specified address using
@@ -38,6 +37,20 @@ class BME280:
         self._device.write8(0xF4, 0x3F)
         print("ok")
         self.t_fine = 0
+    def read_raw_temperature(self):
+        """Assumes that the temperature has already been read """
+        """i.e. that enough delay has been provided"""
+        msb = self._device.readU8(0xFD)
+        lsb = self._device.readU8(0xFD + 1)
+        raw = (msb << 8) | lsb
+        return raw
+    def read_raw_pression(self):
+        """Assumes that the temperature has already been read """
+        """i.e. that enough delay has been provided"""
+        msb = self._device.readU8(0xFD)
+        lsb = self._device.readU8(0xFD + 1)
+        raw = (msb << 8) | lsb
+        return raw
 
     def read_raw_humidity(self):
         """Assumes that the temperature has already been read """
@@ -49,15 +62,11 @@ class BME280:
 
 
 if __name__ == "__main__":
-    from machine import I2C
-    import time
 
     i2c = I2C(0, I2C.MASTER, baudrate=400000)
     print (i2c.scan())
-    print ("all ok")
 
     bme = BME280(i2c=i2c)
-    print("not ok")
     ob = 0
 
     while True:
