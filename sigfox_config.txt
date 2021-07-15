@@ -1,1 +1,0 @@
-{"sigfox": [{"Sigfox_Device_ID": "01b2ab61", "Sigfox_PAC_number": "4d2aeab682f8b24b"}]}
