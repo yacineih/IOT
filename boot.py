@@ -31,15 +31,13 @@ print(network_to_use)
 print("try to connect to wifi : ")
 
 pwd = wifi[network_to_use[0]]['pwd']
-print(pwd)
-
+=
 wlan.connect(ssid=network_to_use[0], auth=(WLAN.WPA2, pwd))
 while not wlan.isconnected():
     print("not connected")
     machine.idle() # save power while waiting
     time.sleep_ms(5)
 print("Connected to "+network_to_use[0]+" with IP address: " + wlan.ifconfig()[0])
-
 print(wlan.ifconfig())
 
 ##192.168.1.57
