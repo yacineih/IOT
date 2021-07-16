@@ -1,0 +1,3 @@
+[submodule "senml-micropython-library"]
+	path = senml-micropython-library
+	url = https://github.com/kpn-iot/senml-micropython-library.git

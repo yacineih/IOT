@@ -16,11 +16,10 @@ print(binascii.hexlify(sigfox.id()))
 # print Sigfox PAC number
 print(binascii.hexlify(sigfox.pac()))
 
-data['sigfox'].append({
-    'Sigfox_Device_ID': binascii.hexlify(sigfox.id()),
-    'Sigfox_PAC_number': binascii.hexlify(sigfox.pac())
-})
+sigfox_c = {"Sigfox_Device_ID" : binascii.hexlify(sigfox.id()), "Sigfox_PAC_number" : binascii.hexlify(sigfox.pac())}
 
+file = open("lopy_sigfox_config.py", "w")
+str_dictionary = repr(sigfox_c)
+file.write("sigfox_c = " + str_dictionary + "\n")
 
-with open('sigfox_config.txt', 'w') as outfile:
-    json.dump(data, outfile)
+file.close()
